@@ -97,4 +97,9 @@ vamos conectar pelo Kibana (nosso software de dashboard)
 > Docker e Kubernets (orquestrador de containers)
 > Istio, Kiali, Prometheus & graFANA (MONITORAR todos os nossos serviços, grafana conecta)
 
+- in golang (go)
 
+possui go mode
+controlador de gerenciamento de versão dos pacotes
+
+go mod init github.com/didier-rda/full-cycle-dev-chalange
