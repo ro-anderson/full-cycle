@@ -1,0 +1,98 @@
+kafka
+
+por quê?
+
+EVENT-DRIVEN
+
+carros autonomos, adicionou produto no carrinho ... tudo movido a eventos.
+e-comerce, alarmes, monitoramento, microserviços.
+
+principalmente em microserviços   (assincrona)
+
+tudo gerado por um unico evento.
+
+transações, eventos , transfromaçoes no sistema.
+
+Tempo real.
+
+latência mto baixo ((ate 2ms))
+
+sistema de mensagferia com histórico de dados.
+
+> guarda no disco.
+
+- características.
+
+
+> é uma plataforma (varuas iocoes)
+> trabalha de forma distribvyuida
+> extrenanebte rapido com baixa latencia
+> utiliza o disco ao inves da memoria pra processar os dados (extremamente veloz mesmo assim)
+
+NÃO É apenas um sistema tradicional de filas como RabbitMQ, vai alem de um sistema de filas.
+
+Conceito básico:
+
+"Topic" 
+
+
+> Stream de dados q atua como um banco de dados 
+> todos os dados ficam armazenados, ou seja, cada topic tem seu 'local' para armazenar seus dados
+> tópicos possuio diversas partições (nao coloca todos os ovos na mesma cesta)
+> cada partição é definido por número. Ex: 0, 1 , 2
+> vc é obrigado a definir a qtd de particoes quiando define um topico
+
+
+conforme as mensagens sao enviadas sao distribuidas em varias particoes.
+ao inves de mandar para o cara final, salva no kafka e depois processa (de forma assíncrona)
+
+todo cara q vai escrever a informação é o Producer
+
+oq vai consumir: consumer
+
+posso ter diversos consumers.
+
+financeiro e centro de distribuição, consumam essa mensagem.
+
+
+1 producer pra N consumer.
+
+Kafka CLuster 
+
+vai ter várias máquinas rodando
+
+- COnjunto de Brocker - cada Brocker é uma máquina - servidor
+
+caeda brokeré responsável por armazenar os dados de uma partição
+CAada partição de topic estpa distrivuído em diferentes brokers.
+
+Kafka CLuster - tem o replication Factor
+
+cada tópico bate em dos broler
+
+se replication factor de 5 - nos N brokers, tenhgo q ter pelo menos
+5 cópias em N com cada partição.
+
+ele tem um zookeper q cuida dessa tarefa.
+
+
+como funciona o processo da mensagem.
+
+ele escolhe o broker e a partição.
+ele é inteligente pra saber  se um consumer cair.
+
+
+O Kafka tem todo um ecosistema (INCRÍVEL)
+
+
+- Kafka Connect
+  Connectors - Leia de um sistema pronto
+  leia de um sistema printo 
+  ficar lendo de um mysqlk e toda vez e ele ver uma alteração ele vai jogar para o mongo db
+
+  Dados de um lado pro outro e fica jogando esses dados.
+
+- Confluiente Schema Registry
+- ksqlDB - em tempo real como ta média de venda
+
+

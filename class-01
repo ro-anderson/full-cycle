@@ -1,0 +1,100 @@
+aplicação de entregas simultaneas
+
+full cycle vs full stack
+
+metodologia pra entregar mais rapidas
+
+uma das formas - cada um sendo especialista e cada cria a sua parte
+
+sistemas grandes cada vez maior 
+
+foram quebrados em grandes pedaços
+
+percisam ser full cycle 
+
+operate what you buid e controle nas ferramentas
+
+full stack - habiluidaded de desenvolvimento.
+
+full cycle ferramentas fazer q escale facilmente
+conversam através de filas etc...
+
+
+
+oq vamos desenvolver?
+
+mini UBER: Inicia o ponto de entrega e ele entrega a parada
+
+
+constrains:
+
+- entregas q permite visualizar em tepo real o veiculo d entrgador.
+
+- há a possibilidade de multiplos  entregadores simultaneos.
+
+- Os dados de cada entrega, bem como as posiçoes, serão armazenadas no elasticsearch para futuras analises. (para análises futuras)
+
+
+
+Desafios:
+
+- pra evitar perda de informação caso o seviço backend fique indisponível por alguns momentos,
+Não trabalharemos com REST. NAO QUEREMOS PERDER NENHUMA INFORMAÇÃO - requisições síncronas.
+
+Solução: Trabalharemos com o Apache Kafka para o envio e recebim,ento de dados entre os sistemas.
+
+- Não é responsabilidade do serviço backend persistir os dados  no Elasticsearch. Logo, como armazenar as informações no Elasticsearch?
+SOlução: utilizaremos o kafka connect q tambem consumirá os dados do simulador e dara a inserção no elasticsearch (orientado a documentos)
+
+
+- Precisar exibir em tempo real a localização de cada entregador
+Solução: Trabalaremos com websockects ()mica dassim q o vackend receber A INFO do apache kafka, ele vai receber essa info do servidor)
+fica persistente enviará as posições para o forntend via wevsocket.
+
+
+Dinamica do sistema:
+
+
+
+simulador <---->   apache kafka    <----> backend
+(lat e long)
+                       |                     |
+                       kafka connect      front end
+                       |
+   Kibana    <->      Elasticsearch
+
+
+
+simulador fica mandando dados de latitude e longitude e a corrida q ta acontecendo
+
+backend: pega a sposicoes q sao enviadas pelo simulador
+
+apache kafka: vai fazer esse invio
+
+
+o processo começa pelo backend: "to iniciando essa corrida aqui, é a corrida tal"
+o simulador acessa o kafka e o simulador começa a disparar pro kafka (a cada meio milisegundo por exemplo)
+back vai la e consome os dados do kafka
+
+via web sockets, o backend começa a enviar pro front onde está o carrinho.
+
+pra jogar os dados do kafka no elasticsearch, 
+utilizaremos o connect, conforme o  simulador para o kafka, o kafka connect vai enviar pro Elasticearch
+
+de la teremos os dados de todas as posiçoes
+
+vamos conectar pelo Kibana (nosso software de dashboard)
+
+
+
+- Tecnologias a serem utililizadas
+
+> simulador: Golang (ótimo para mult threading)
+> backend: Nest.js & Mongo (Nest específico pra fazer microserviços)
+> Frontend: React
+> Kafka e Kaafka COnnect 
+: Elasticsearch & Kibana
+> Docker e Kubernets (orquestrador de containers)
+> Istio, Kiali, Prometheus & graFANA (MONITORAR todos os nossos serviços, grafana conecta)
+
+

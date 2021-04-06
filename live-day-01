@@ -1,0 +1,311 @@
+pessoal do Mercado Livre
+MELI
+
+Juliano Marcos Martins
+Matheus Munareto
+Pedro Chagas
+
+Paas
+
+5 mil microserviços
+
+feuri
+
+fornece microserviços q o pessoal do MELI consome
+
+faz a gestão do deploy e microserviços da vida do desenvolvedor
+
+6500 deploys por dia
+
+ser o dono do serviço
+
+serviço - necessidade q todo dev do ml precisa
+
+todo dev utiliza ele.
+
+
+up time, custo e escale.
+
+não permitir q vire um monstro q qto mais cresce só gasta.
+
+focar no mais negócio.
+
+
+Seja um dev e a tec é detalhe.
+dev q não importa a linguagem.
+
+cloud & plataform.
+
+ser dev, arquiteto e planejador.
+
+dev fullcycle
+cumprir toda a stack -
+conhecer todas as tecnologias.
+e saber usa-las.
+como é desenvolver um serviço tão base (6.5k deploys)
+
+precisa ter esse controle
+
+
+- Visibilidade (CHAVE)
+funciona bem e como a gente esperava?
+
+aqui a gente constroi tudo junto!
+todos tem conhecimentos técnicos e valida com outros devs.
+
+quando uma coisa cai, é uma equipe
+
+- Ownership (DONO DA SUA APLICAÇÃO- micro serviço)
+serviços bem desenhados.
+
+equipes bem divididas.
+
+e deploys?
+
+existem alguns sistemas, q não podem ficar fora do ar nenhum segundo (críticos)
+
+processo de deploy é q nem neve pra skimo (10k tipos de deploys mas sí enxerga um)
+
+estratégia de deploy:
+
+6.5k deploys por dia;
+
+deploy green, canary, safe e update. (exs)
+
+como se faz o controle?
+o usuário pode ser adm, deployer, commiter ,m builder
+
+altera o código mas não pode deployar
+
+1 commiter pode fazer em n produtivos
+1 deployer em ambientes produtivos
+
+segurança dq tá fazendo e controle sobre os acessos.
+
+1 das implantações:
+rolling update
+alteraçao da aplicaão nas instancias s)ncó muda versão)
+
+
+como avisa a instancia q só vai mudar a iumplanta
+
+
+toda aplicação:
+container da aplicacao, de datadog, midler
+
+
+1 desses containers vai puxar a troca de versão
+recebe a requisição de update
+faz o download de um bucket do s3.
+
+s3 > atualizei a versão desssaa aplicação> gera um docker compose novo
+
+ESTUDAR roling update
+
+processo de all in:
+
+seta todo o vloco de instancia e muda de 1 vez.
+
+nao usado em escopos produtivos mas é uma estrategia quando 
+
+estrategia blue green:
+
+cria um cluster, como cluster atual da aplic
+
+cria um novo cluster
+só vai pro cluster novo quando tudo está ok.
+
+quando faz rool black muda o tráfico de dados e não o
+
+deploy safe:
+deploy mais lento e mais assistido
+
+cria novo cluster inicia as instancias
+
+10% para as instancias
+
+- canary:
+
+nada mais é dq:
+precisamos de um tráfico produtivo e verificar se essa versão atende a 
+
+analisar o processo de deploy.
+
+épocas / eventos do ano, devemos interromper esses deplous
+
+quando cria um novo cluster pode cadastrar q ele tem afetação com o usuário.
+
+na black friday nao pode ter implantação ao tempo todo.
+
+políticas de freezing:
+politica pra todas as implantações
+
+no feury vc pode criar as suas próprias políticas
+
+deploy canary:
+
+deployer ambiente produtivo
+
+1o passo:
+
+criar o tipo de versão
+dev - release - master
+
+a partir de cada uma dessas branchss saoo criadas
+
+essas branchs são imutaveis
+
+pra gerar a versão antes são executadas validações:
+vuneralibidade de bibliotecas
+cubertura de código
+pegar uma dessas estratégias e fazer a implementações com esse objetivo
+tem q ter 80% de cobertura.
+
+o desenvolvedor pode escolher a covertura mínima ((80% no minimo para todo o ML)
+
+muita gente usa gitflow.
+
+caiu na master sobe ou tenho q dar uma pr pra subir?
+
+cai na master > gera versão imutável > pode escolher se quer fazer o deploy e onde qr fazer
+
+complementando a questção do gitflow
+
+gerar versão a partir de uma branch.
+
+hot fix pode fazer o merge direto na master.
+
+feury faz um enforcement antes de ele subir
+
+não sobe hard coded
+
+feury na gcp ou na amazon
+
+alguns serviços da pra ser multi cloud
+
+quais tecnologias o pessoal do feury usa:?
+
+devys não feury
+java, javascript e golang
+ruby.
+
+devs feury tem autonomia de melhor linguagem.
+não existe bala de prata e vamos buscar a melhor tecnologia q vai nos atender.
+
+Pedro como está a utilização do GO no mercado livre.
+
+Go - Experiência com a linguagem
+
+sou desenvolvedo r q nunca fiquei focado em uma linguagem, ela é um detalhe.
+
+manipular dados numa escala grande e performance alta
+
+performance alta e latência baixa - Go
+
+escala: 6 - 7 milhões por seguindo
+
+gancho para uma próxima live:
+
+engine servelles baseada em kubernets com GO
+
+
+adapta de acordo com oq precisa.
+
+como funciona a parte de auditoria
+
+pq existe? pq é um servilo?
+
+surgiu com pessoal do mercado pago
+
+essa necessidade começou a evoluir
+
+oq é aditoria nesse caso?
+
+suponha uma transação q mudou ao longo do tempo
+preciso de todo esse histórico
+
+no Brasil, no mínimo 5 anos. (tem q fazer a auditoria pra todas a áreas e diferentes países)
+
+qualquer POC consigo passar no furry?
+qualquer tipo de aplicação
+
+pode validar por https ou por banco de dados.
+
+conceito de event source - pode quebrar em recurso
+prove sdk - python, node m javascript
+
+best effort e mandatória
+
+
+oq tem q saber pra conseguir o trampo?
+
+conhece java a fundo, mas como vai pra uma questão mais arquitetonica, de boas praticas, a galera se perde.
+
+faz falta do pessoas estudas as bases do desenvolvimento.
+mto dev q aprenderam uma linguagem e utilizam de forma bem legal (node) e mta coisa pronta, essas pessoas sentem q sao senior
+e não estudaram.
+
+encontra pessoa desqualificada querendo ganhar milhões.
+
+- dicas:
+codificador limpo Uncle Bob - the clean coder
+
+planejamento 60 - planejar as demandas
+40h trabalhar e 20 pra estudo
+ferramentas e tendências
+
+ficar de olho no que o mercado está pedindo.
+
+clean architecture - clean code - vou usar pq escala
+
+tem q entender como é o processamento da linguagem antes de escolher a tecnologia.
+
+conhecer o domínio
+
+engajaado com o domínio do cliente.
+conhecendo consegue encaixar soluções de arquitetura melhores.
+
+desafio técnico mercado livre
+
+aceitar q voltar e fazer tudo de novo.
+
+começa insistir, chega no prazo final nao vou passar, muda toda a abordagem.
+a arte de saber jogar fora.
+
+não pode ser esperansoso demais
+
+importante dizer não
+
+posso inventar a roda pra vc mas isso nao é adequado.
+
+ser um modelo de desenvolvedor, coder atersão.
+
+clean coder, clean architecture
+
+quais são os protocólos q a ferramenta suporta.
+
+
+avaliaria um cenário ideal para o 
+
+lousa branca:
+uptime, eficiente, exp boa pro usuário final
+negociar, se comunicar, 
+
+nao seja só uma sabatina
+
+tenta dar um feedback o mais detalhado possível.
+
+quadro branco -
+
+pode ter feito uma coisa bem legal e tentam quebrar a solução da pessoa
+confontrar
+
+feury detecta baixo uso em máquina potente
+gera oportunidade ()auto executável) 
+
+escopo não produtivo 
+
+vai tomar café, bate o ponto, faz um boost de inst
+
+se não for produtível, vai se destruir em um intervalo de tempo.
+
