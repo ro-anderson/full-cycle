@@ -1,0 +1,214 @@
+oq são?
+namespaces - isolamentos dos processos
+conjunto de processos faz referência para aquele processo.
+
+processo pai container 1
+filho container 1
+
+processo pai container 2
+filho container 2
+
+se matar o processo principal, mata os filhos.
+
+namespaces.
+
+tipos de processos.
+
+dentro de um namespace
+Pid - processos
+USER
+Network
+File system
+
+container - um processo com subprocessos, emulando um sistema operacional.
+
+
+Sistema Operacional
+Namespaces -  Isola os processos
+Cgroups -     isola recursos computacionais dos processos, p q n afetem os processos da maq.
+File System - OFS (OVERLAY FILE SYSTEM)
+
+OFS:
+guarda a diferença para uma nova versão
+
+
+imagens - camadas.
+
+camada vazia - scratch
+
+
+
+
+IMAGEM - árvore de dependências, podem ser usadas pra diversas outras imagens.
+
+        myApp:v1
+bash e ssh
+ubuntu
+scratch
+
+MyappImage:v1
+
+
+arquivo de definição de imagens: Dockerfile
+
+From: ImagemName
+RUN: Comandos ex: apt-get install
+
+EXPOSE: 8000
+
+para eu ter um sistema operacional rodando eu tenho q ter:
+
+Namespaces (isola processos), Cgroups (Controla os recursos), File System  ()
+
+processo dentro de um OS
+
+
+dentro do processo:
+
+Imagem em um estado imutável
+
+rápida e leve.
+
+na imagem temos uma camada de READ/WRITE, onde conseguimos escrever.
+estamos alterando uma camada do processo.
+
+Dockerfile > build > gera uma imagem imutável
+
+duas maneiras de gerar uma nova imagem:
+
+à partir de um novo Dockerfile
+
+ou
+
+pegar um container q está rodando, escrever dentro dele na camada de write
+e quando dou um commit, uma nova imagem é gerada a partir da q estava rodando. 
+
+imagem fica dentrode um image registry (tipo github)
+
+Dockerfile <- pull <- Image registry
+Dockerfile -> push -> Image registry
+
+Namespace, Cgroups e file systems - DOcker
+
+entrypoint - executável (sobe e morre)
+
+entrypoint tem q ficar rodando ou o processo morre.
+
+docker container ls
+
+na col COMMAND, mostra o comando q rodou.
+
+container é um processo, se não tem processo, ele cai.
+docker container run -it --rm ubuntu:latest bash
+
+nginx - servidor
+
+
+PORT
+80/tcp
+
+porta 80 aberta pra vc rodar.
+
+
+se tentar apenas localhost, não vai acessar. PQ?
+
+uma coisa é sua maquina outra é o container.
+
+para aquele container a porta 80 está ativa,
+nao significa q meu host consegue acessar aquela porta;
+
+se tivesse ouitro conta9ner rodando na mesma network, ele conseguiria.
+
+docker run -p 8080:80 nginx
+
+quando o host acessar 8080, ela vai acessar a porta 80 do nginx;
+
+publica a porta.
+
+0.0.0.0:8080 -> 80/tcp
+
+
+0.0.0.0 minha máquina - localhost
+toda vez q acessar a 8080, vai acessar a 80 do docker
+
+
+acessando e alterando um container:
+docker exec iamgename ls
+
+docker exec -it nginx bash
+
+dar o apt-get update pra pegar todas as imagens arqvs disponiveis pra baixar.
+
+
+vc  NAO GRAVA NA IMAGEM alterando um arquivo dentro do container.
+
+- docker bind mount
+
+volume dentro do seu computador pro seu contanier.
+
+docker container run -d --name nginx -p 8080:80 /home/didier/studies/full-cycle-dev-chalange/docker/bind-mount/html/:/usr/share/nginx/html nginx
+
+montei uma pasta do meu computador para uma pasta dentro do container
+
+docker no ambiente de desenvolvimento.
+
+arquivo no seu pc mas vc desenvolve nele.
+
+maneira moderna de montar:
+
+* tem q ser tudo junto a partir do type:
+
+docker run -d --name nginx -p 8080:80 --mount type=bind,source="$(pwd)"/html,target=/usr/share/nginx/html nginx
+
+diferença entre docker -v e mount
+
+quando coloco -v ele cria a pasta mesmo q ela não exista.
+
+agora rodando com -mount, ele dá erro pq a pasta não existe.
+
+
+- VOLUMES - específico do docker
+
+driver - tem local , remotoo
+
+conseguimos criar o volume e apontar pra dentro do dcker sem necessariamente saber a pasta
+tbm é possível mapear entre volumes
+
+criando volume:
+docker volume create myvolum
+
+docker volume inspect myvolum
+
+[
+    {
+        "CreatedAt": "2021-04-21T11:24:33-03:00",
+        "Driver": "local",
+        "Labels": {},
+        "Mountpoint": "/var/lib/docker/volumes/myvolum/_data",
+        "Name": "myvolume",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+
+docker run --name nginx 0d --mount type=volume,source=myvolum,target=/app nginx
+
+docker run --name nginx -d -v myvolum:/app nginx
+
+
+docker exec -it nginx bash 
+
+(vai ter a pasta compartilhada app)
+
+docker volume prune
+
+-   Entendendo imagens
+
+remove image 
+
+docker image rm <name:versionVy>
+docker rmi <name:versionVy>
+
+image é composta de leyerm elea vai removendo 1 a 1
+(chunks)
+
