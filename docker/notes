@@ -212,3 +212,30 @@ docker rmi <name:versionVy>
 image é composta de leyerm elea vai removendo 1 a 1
 (chunks)
 
+- Networks
+
+rede interna que roda dentro dele
+
+comunicação entre containers
+
+tipos de network principais:
+
+- bridge (mais comum)
+1 container com o outro
+
+- host
+mescla o docker com network do docker
+maquina pode acessar o container sem fazer a exposição de porta
+
+- overlay (n tao comum)
+
+containers em maquinas diferentes
+
+- maclan
+ii
+- none
+
+multi stage build
+
+
+
