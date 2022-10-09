@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+
+  db:
+    platform: linux/amd64
+    image: mysql:5.7
+    container_name: db
+    command: --innodb-use-native-aio=0
+    tty: true
+    networks:
+      - rocks
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=node-api
+      - MYSQL_ROOT_PASSWORD=root
+    
+  api:
+    platform: linux/amd64
+    image: roanderson/node-api
+    container_name: node
+    entrypoint: dockerize -wait tcp://db:3306 -timeout 60s node /app/index.js
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+#    volumes:
+#      - ./api:/app
+    tty: true
+#    ports:
+#      - 3000:3000
+    networks:
+      - rocks
+    depends_on:
+      - db
+
+  proxy:
+    image: roanderson/proxy
+    container_name: proxy
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    tty: true
+    ports:
+      - 8080:80
+    networks:
+      - rocks
+    depends_on:
+      - api
+
+networks:
+  rocks:
+    driver: bridge

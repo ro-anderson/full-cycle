@@ -1,0 +1,1 @@
+docker run --rm -it -v $PWD:/app -p 3000:3000 node:15 bash
