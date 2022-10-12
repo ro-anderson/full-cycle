@@ -1,0 +1,469 @@
+tipos de arquitetura:
+
+tecnológica
+- tecs específicas do mercado (sap, elasticsearch)
+
+corporativa
+- impacta estrategicamente a organização como um todo
+- avaliação de custos
+- avaliação de possíveis novas tecnologias
+- pluraridade tem q ser plural porém coerente com a empresa
+
+solução
+- entre negócios e software
+- transforma requisitos de negócio em soluções de software
+- desenhos arquiteturais da solução de um software para reproduzir como ele irá funcionar
+diagramas:
+c4
+uml
+BPMN
+analisa os impactos comerciais em relação a uma escolha de tecnologia
+pode particpar do processo comercial de pré-venda e venda
+analisa os impactos dos custos para o negócio
+
+
+software
+- é uma disciplina da engenharia de software
+- diretamente ligada ao processo de desenvolvimento de software
+- afeta diretamente na estrutura organizacional da empresa
+- formação dos times
+- estrutura dos componentes do software
+- lei de Conway : org que desenvolvem sistemas de software tendem a produzir sistemas
+que são cópia das estruturas de comunicação dessas empresas.
+- relação entre objetivos de negócio e suas restrições com os componentes a serem
+criados e suas responsabilidades visando sua evolução de software
+
+como desenvolver em componentes?
+como atender as necessidades da empresa?
+como lidar com restrições da empresa?
+
+sistemas e seus componentes, suas relações, seu ambiente, bem como os princípios
+que guiam seu design e evolução;
+
+tem q ser sustentável;
+
+papel do arquiteto de software?
+
+transformar requisitos -> padrões arquiteturais
+orquestra pessoas desenvolvedoras e experts de domínio
+
+entender de forma profunda conceitos e modelos arquiteturais
+
+tem q saber de modelos arquiteturais, não ter essa limitação.
+auxiliar na tomada de decisão nos momentos de crise.
+
+reforçar boas práticas de desenvolvimento;
+code reviews
+validar componentes estão ali;
+
+pq arq software?
+- poder navegar da visão macro para a visão micro de um ou mais softwares
+- entender quais sao as diversas opções que temos para desenvolver a mesma coisa e
+escolher a melhor solução para determinado contexto
+
+- pensar a longo prazo no projeto e sua sustentabilidade
+
+- menos influenciado a novos hypes do mercado
+
+- mergulho em padroes de projeto e de desenvolvimento e suas boas práticas
+
+- ter mais clareza do impacto que o software possui na organização como um todo
+  perder o senso de percentimento
+
+- tomar decisões com mais confiança
+
+Arquitetura vx Design de software
+
+Arquitetura: escopo global ou alto nível
+
+Design: mais baixo nível
+
+tudo de arqu é design
+nem tudo que é design é arquitetura
+
+atributos de qualidade;
+como implementar logs?
+
+Sustentabilidade
+
+- desenvolver software é caro
+- software resolve uma "dor"
+- precisa se pagar ao longo do tempo
+
+software tem q evoluir e se manter
+de tal forma que o custo dele seja menor com o lucro
+
+- acompanhar a evolução do negócio
+
+- a solução precisa ser arquitetada
+
+ser sustentável no dia 0
+
+Pilares da Arquitetura de software
+- estruturação
+- fácil evolução, componentização para atender os objetivos de negócio
+- Componentização
+- Relacionamento entre sistemas
+- Governança: essas regras, assim vamos documentar, assim com issues, assim com code review 
+
+requisitos arquiteturais
+ no formato de squads hj vemos mais em arquitetos de solução
+
+- performance
+- armazenamento de dados
+- escalabilidade
+- segurança
+- legal
+- audit
+- marketing
+
+Características arquiteturais
+
+"qto mais me preparo mais sorte eu tenho sorte"
+
+- openracionais
+   (nao vai ter q fazer mas tem que garantir a possibilidade)
+ -- Disponibilidade (SLA, SLO) o quão disponivel? Qual a disp. pro meu cliente?
+ -- Recuperação de Desastres
+    Oq acontece se uma regiao da aws ficar off?
+ -- Performance 
+    banco de dados
+    500 reqs por seq
+    500k por seq
+ -- Recuperação (backup)
+    testar backup em multicloud
+ -- Confiabilidade e segurança 
+    se esta fazendo um brutal force no seu sistema, como lidar?
+ -- Robustes
+    alem de confiavel se precisar escalar vai conseguir?
+    se a emp. precisar de varias regioes, como lidar?
+    aws nao é infinita
+ -- Escalabilidade
+    Vertical ou horizontal (12 fatores)
+    applicação tem q permitir um ambiente escalável
+    vertical: aumenta o recurso da nossa máquina
+    horizontalmente: mais maquinas
+
+    minimo escalavel principalmente horizontal
+
+ 
+- estruturais
+ -- Configurável
+    var ambiente
+    getway de pagamento apikey ta fácil?
+
+-- Extensibilidade
+   interfaces, adaptadores, e nao fique refem de vendors.
+   vendors e novos módulos.
+
+-- Fácil instalação
+   padronização de ambiente: containers
+   configurável
+   dependências simples;
+
+-- Reuso de componentes
+   todas as libs que podem ser compartilhadas e manter times
+
+-- Internacionalização
+   moeda
+
+-- Fácil manutenção
+   aprenda solid de verdade
+   adaptadores, camadas, interfaces
+   evite acoplamento
+   crie testes;
+
+-- Portabilidade (diversos bancos de dados)
+
+-- Fácil suporte
+   logs, debugging
+   area de sustentação antes do cliente apitar
+   focar mto em observabilidade
+
+pegar esse checklist q te ajuda.
+
+-cross-cutting
+
+Acessibilidade
+- retenção e recuperação de dados
+  qto tempo os dados serão mantidos
+
+- Autenticação e autorização
+  arquitetura distribuida torna mais complexo
+  api gateway: antes de cair na sua aplicação cai nela
+
+- Legal
+
+- Privacidade
+
+- Segurança (desde a borda da sua aplicação)
+  utilize padrão aberto
+
+- Usabilidade
+  não apenas frontend
+  doc, tem contrato claro?
+  tem readme?
+
+Performance
+
+é o desempenho que um software possui para completar um
+  determinado workload
+
+unidades para avaliarmos a perfomance de um software são:
+  - Latência ou "response time" (foco em diminuir)
+  - Throughput qto de req esse software consegue aguentar (aumentar)
+  - Performático é diferente de ter um software escalável
+
+Métricas para medir a perfomance
+  - diminuir a latência
+   -- normalmente medida em mileseconds
+   -- é afetado pelo tempo de processamento da aplicacao, rede e chamadas externas
+   - aumentando throughput
+    -- qtd de requisições
+    -- diretamente ligado a latência
+
+Principais razões para baixa perfomance
+ - processamento ineficiente
+ - recursos computacionais limitados
+ - trabalhar de forma bloqueante (toda vez q faz uma request e bloquear a aplicação)
+ - acesso serial a recurso (sem multi thread)
+
+Principais formas para aumentar a eficiência
+
+ - escala da capacidade computacional (CPU, Disco, memória, Rede)
+ - Lógica por trás do software (Algoritmos, queries, overhead de frameworks)
+ - Concorrência e paralelismo
+ - Banco de dados (tipos de bancos, schema)
+ - Caching
+
+ Capacidade computacional: Escala vertical vs horizontal
+
+ - Escala vertical
+  -- recursos computacionais
+
+ - Escala Horizontal
+  -- balancer que opera número de marcas
+
+Diferença entre concorrência e paralelismo
+
+"Concorrência é sobre lidar com muitas coisas ao mesmo tempo
+ Paralelismo é fazer muitas coisas ao mesmo tempo" - Rob Pike
+
+trabalhando de forma serial:
+ 5ms -> 5ms -> 5ms -> 5ms ->
+
+forma concorrente e paralela:
+ - 5 6hreads
+ - atendendo 5 requests
+
+ 5ms 
+ -> 
+ 5ms 
+ -> 
+ 5ms 
+ -> 
+ 5ms 
+ ->
+
+Caching
+- Cache na borda / Edge Computing
+  -- dados estáticos
+  -- Página web
+  -- funções internas
+   --- Acesso ao banco de dados
+   
+- Objetos (ORM)
+
+Caching exclusivo vs compartilhados
+
+- Exclusivo
+ -- baixa latência
+ -- Duplicidade entre os nós (recomenda)
+ -- Problemas relacionados a sessões
+
+Compartilhado
+ -- Maior latência
+ -- Não há duplicação
+ -- Sessões compartilhadas
+ -- banco de dados externo
+ -- Redis
+ -- Memcache
+
+Caching: Edge computing Computação de borda
+perceber tudo q está na borda e colocar em Edge computing
+ -- cache realizado mais próximo ao usuário (imagem da sua emp perto)
+ -- Evita a requisição chegar até o cloud Provider / infra
+ -- Normalmente arquivos estáticos (cloud fair)
+ -- CDN (Counter Delivery Network) Akmine: + de 500 pontos no Brasil
+ -- Cloudflare workers
+ -- Vercel (next.js)
+
+Escalabilidade
+ - Escalabilidade é a capacidade de sistemas suportarem o aumento
+ (ou a redução) dos workloads incrementando (ou reduzindo) o custo
+ em menor ou igual proproção
+
+Escalabilidade vs Perfomance
+- Enquanto perfomance tem o foco em reduzir a latencia e aumentar o
+througput, a escalabilidade bisa termos a possibilidades de aumentar
+ou diminuir o throughput adicionando ou removendo a capacidade computacional
+
+Escalabilidade foca no throughput
+
+Escalando software = Descentralização
+ - Disco Efêmero
+ - Servidor de aplicação vs Servidor de assets
+ - Cache centralizado
+ - Sessões centralizadas
+ - Upload / Gravação de Arquivos
+
+Escalando bancos de dados
+(Athena vs Redshift)
+
+ - Aumentando recursos computacionais
+ - Distribuindo responsabolidades (escrita vs leituras)
+ - Shards de forma horizontal (fragmento)
+ - Servelless (Athena)
+
+ Otimização de queries e índices (APM - application )
+ - Trabalhar com índices de forma consciente
+ - APM nas querys
+ - Explain nas queries
+ - cqrs (command query responsability segregration)
+  -- separando comando (escrita e leitura)
+
+Proxy Reverso
+
+  Um monte de usuário e ele tenta acessar um site,
+  proxy redireciona.
+
+  proxy reverso é um servidor que fica na frente
+  do servidor web e encaminha as solicitações do cliente
+  (por exemplo, navegador web) para esses servidores web
+  
+Soluções populares de proxy reverso
+  - Nginx
+  - HAProxy (high avaiability)
+  - Traefik
+
+Resiliência
+
+  conjunto de estratégias adotaas intencionalmente para
+  a adaptação de um sistema quando uma falha ocorre
+
+  - apenas subir uma excpeption e dane-se
+  ou perceber q tem algo errado e ter um plano B
+
+  tem q ser de forma intencional.
+
+  evitar perda de transações
+
+Estratégias para Resiliência
+
+Proteger e ser Protegido
+ - Mecanismos de autopreservação para garantir
+   ao máximo sua operação
+ 
+ - Um sistema precisa não poder ser "egoista"
+   ao ponto de realizar mais requisições em um
+   sistema que está falhando.
+
+ - Um sistema lento no ar muitas vezes é pior do
+   que um sistema fora do ar. (efeito dominó)
+
+Health Check
+ - Sem sinais vitais, não é possível saber a saúde
+   de um sistema.
+
+ - Um sistema que não está saudável possui chance
+   de se recuperar caso o tráfego pare de ser 
+   direcionado a ele temporariamente.
+
+ - Health check de qualidade (não apenas um html)
+
+Rate Limiting
+ - Protege o sistema baseado no que ele foi protegido
+   para suportar ())ncaguenta 100 req por seg)
+
+ - Preferência programada por tipo de client
+   100 req e 1 cliente com metade das reqs.
+   o sistema q não tem tanta importancia pode atrapalhar
+   outros q realmente precisam acessar.
+
+Circuit Braker (Disjuntor)
+ - Protege o sistema fazendo com que as requisições
+   feitas para ele sejam negadas. Ex: 500
+
+   circuito fechado = reqs chegam normalmente 200
+   circuito aberto = res nao chegam no sistema 500
+   circuito meio aberto = permite qtd limitada de rqs
+                          para verificação se o sis tem
+			  condiçòes de voltar ao ar
+			  intengralmente
+
+API Gateway (portaria)
+ centraliza todas as reqs
+
+ garante q reqs inapropriadas cheguem até o sistema:
+  - Ex: usuário não autenticado
+  - Kong
+  - Implementa políticas de Rate Limiting, Health check, etc.
+
+  ex to recebendo um xml posso colocar pra virar um json
+  pode rodar um lambda function
+
+  tomar cuidado para não colocar regra de negócio
+
+Service Mesh (malha de serviços)
+
+ - Controla o tráfego de rede
+  -- toda vez q o sistema A quer conversar com B
+     passa por uma proxy reversa;
+     tudo consegue ser medido, tendo controle vc consegue
+     controlar oq fazer.
+  -- bom pra rate limit
+  -- se vc nao consegue observar as aplicações vc nao sabe oq
+     colocar no rate limit, circuit brake ...
+  -- ajuda a controlar e saber oq está fazendo;
+  -- mTLS
+
+Trabalhar de forma assíncrona (tem a ver com resiliência)
+
+ - Se não tem caixas o suficiente vc entra numa fila e aguarda
+ - Evita perda de dados
+ - Não há perda de dados no envio de uma transação se o server
+   estiver fora (kafka - mensager broker, entrega qdo estiver
+   disponível para receber)
+ - Entender com pronfundidade o menssage broker / sistema de stream
+
+Garantia de entrega
+
+Política de Retry
+ctza q a mensagem chega no destino (garantia de resilência)
+Não adianta apenas fazer retry
+
+ - Exponential Backoff - 1, 2 , 4, 16s ... de tempo até retry
+ - Exponential Backoff com Decorr (algoritmo de ruído)
+
+Message Broker Kafka
+
+fire and forget (caminho do uber nao precisa receber todas as mensagens de geo loc)
+
+alta velocidade : Ack 0
+
+moderado : Ack 1
+
+mais garantia: Ack -1
+
+Situações complexas e decisões de alto nível
+
+resiliencia no dia 0
+resiliencia da resiliencia (provocação)
+
+oq acontece se o broker cair?
+como garantir resiliência?
+haverá perda de mensagem?
+seu sistema ficará fora do ar?
++ resiliência +caro
+
+qm define resiliência é o CTO
