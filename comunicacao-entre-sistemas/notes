@@ -1,0 +1,56 @@
+microserviço tenha seu próprio banco de dados
+
+ex: Tudo referente a produtos
+
+Comunicação sincrona e assincrona
+
+cada micro tem seu db
+
+exemplo:
+gerenciamento de produtos:
+
+ter acesso aos produtos
+
+sincronia entre os bancos de dados
+
+sync id e nome do produto
+
+em assíncronoscidade eventualmente temos
+conscistência eventual
+(inconscistência entre bancos)
+
+REST
+
+simplicidade
+
+através do próprio http a realizar
+transação
+
+- simplicidade
+- stateless
+- cacheável
+
+- Níveis de MATURIDADE
+
+-- nível 0
+
+-- nível 1: Utilização de resoucers
+
+-- nível 2: Verbos HTTP
+
+- nível de maturidade 3:
+
+ -- HATEOAS
+ Hypwemwsi
+    retorna links, caminjos outras operações
+    a partir de uma chamada
+
+Hall (hal+json)
+
+requisição OPTIONS
+
+laminas API TOOLS
+
+
+
+
